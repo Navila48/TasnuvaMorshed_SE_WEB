@@ -16,7 +16,7 @@ public class RestController {
 	@GetMapping("/")
 	public String hello()
 	{
-		return "This is ICC";
+		return "Is this working? ok,please go to welcome page";
 	}
 	
 	@GetMapping("/saveCountry")

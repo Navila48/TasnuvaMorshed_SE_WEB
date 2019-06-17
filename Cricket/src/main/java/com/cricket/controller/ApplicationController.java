@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cricket.model.Country;
+import com.cricket.model.User;
 import com.cricket.services.CountryService;
+import com.cricket.services.UserService;
 
 @Controller
 public class ApplicationController {
 
 	@Autowired
 	private CountryService countryService;
+	@Autowired
+	private UserService userService;
 	@RequestMapping("/welcome")
 	public String welcome(HttpServletRequest request)
 	{
@@ -62,6 +66,21 @@ public class ApplicationController {
 	{
 		request.setAttribute("country",countryService.editMyCountry(id));
 		request.setAttribute("mode","UPDATE_COUNTRY");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/register-user")
+	public String userRegistration(HttpServletRequest request)
+	{
+		request.setAttribute("mode", "REGISTER_USER");
+		return "welcomepage";
+	}
+	
+	@PostMapping("/save-user")
+	public String registerUser(@ModelAttribute User user,BindingResult bindingResult,HttpServletRequest request)
+	{
+		userService.saveMyUser(user);
+		request.setAttribute("mode","HOME");
 		return "welcomepage";
 	}
 }
