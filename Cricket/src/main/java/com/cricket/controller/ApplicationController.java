@@ -56,4 +56,12 @@ public class ApplicationController {
 		request.setAttribute("mode", "ALL_COUNTRIES");
 		return "welcomepage";
 	}
+	
+	@RequestMapping("/edit-country")
+	public String editCountry(@RequestParam int id,HttpServletRequest request)
+	{
+		request.setAttribute("country",countryService.editMyCountry(id));
+		request.setAttribute("mode","UPDATE_COUNTRY");
+		return "welcomepage";
+	}
 }

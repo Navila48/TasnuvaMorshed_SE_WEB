@@ -38,4 +38,8 @@ public class CountryService {
 	{
 		countryRepository.delete(id);
 	}
+	public Country editMyCountry(int id)
+	{
+		return countryRepository.findOne(id);
+	}
 }

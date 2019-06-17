@@ -42,26 +42,26 @@
 				</div>
 			</div>
 		</c:when>
-<c:when test="${mode=='REGISTER_COUNTRY' }">
-		<div class="container text-center">
-			<h3>New Country Registration</h3>
-			<hr>
-			<form class="form-horizontal" method="POST" action="save-country">
-				<input type="hidden" name="id" value="${country.id }" />
-				<div class="form-group">
-					<label class="control-label col-md-3">Country</label>
-					<div class="col-md-7">
-						<input type="text" class="form-control" name="country_name"
-							value="${country.country_name}" />
+		<c:when test="${mode=='REGISTER_COUNTRY' }">
+			<div class="container text-center">
+				<h3>New Country Registration</h3>
+				<hr>
+				<form class="form-horizontal" method="POST" action="save-country">
+					<input type="hidden" name="id" value="${country.id }" />
+					<div class="form-group">
+						<label class="control-label col-md-3">Country</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="country_name"
+								value="${country.country_name}" />
+						</div>
 					</div>
-				</div>
-				<div class="form-group ">
-					<input type="submit" class="btn btn-primary" value="Register" />
-				</div>
-			</form>
-		</div>
+					<div class="form-group ">
+						<input type="submit" class="btn btn-primary" value="Register" />
+					</div>
+				</form>
+			</div>
 		</c:when>
-		
+
 		<c:when test="${mode=='ALL_COUNTRIES' }">
 			<div class="container text-center" id="tasksDiv">
 				<h3>All Countries</h3>
@@ -80,17 +80,38 @@
 							<c:forEach var="country" items="${countries }">
 								<tr>
 									<td>${country.id}</td>
-									<td>${country.country_name}</td>								
-									<td><a href="/delete-country?id=${country.id }"><span class="glyphicon glyphicon-trash"></span></a></td>
-									
+									<td>${country.country_name}</td>
+									<td><a href="/delete-country?id=${country.id }"><span
+											class="glyphicon glyphicon-trash"></span></a></td>
+									<td><a href="/edit-country?id=${country.id }"><span
+											class="glyphicon glyphicon-pencil"></span></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
-</c:when>
-		
+		</c:when>
+<c:when test="${mode=='UPDATE_COUNTRY' }">
+			<div class="container text-center">
+				<h3>Update Country Name</h3>
+				<hr>
+				<form class="form-horizontal" method="POST" action="save-country">
+					<input type="hidden" name="id" value="${country.id }" />
+					<div class="form-group">
+						<label class="control-label col-md-3">Country</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="country_name"
+								value="${country.country_name}" />
+						</div>
+					</div>
+					<div class="form-group ">
+						<input type="submit" class="btn btn-primary" value="Update" />
+					</div>
+				</form>
+			</div>
+		</c:when>
+
 	</c:choose>
 
 	<!-- Optional JavaScript -->
