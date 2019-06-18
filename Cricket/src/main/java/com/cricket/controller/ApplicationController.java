@@ -109,4 +109,26 @@ public class ApplicationController {
 		request.setAttribute("mode","UPDATE_USER");
 		return "welcomepage";
 	}
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest request)
+	{
+		request.setAttribute("mode","LOGIN_USER");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/login-user")
+	public String userLogin(@ModelAttribute User user,HttpServletRequest request)
+	{
+		if(userService.findByUsernameAndPassword(user.getUsername(), user.getPassword())!=null)
+		{
+			return "homepage";
+		}
+		else
+		{
+			request.setAttribute("error","Invalid Username or Password");
+			request.setAttribute("mode","LOGIN_USER");
+			return "welcomepage";
+		}
+	}
 }

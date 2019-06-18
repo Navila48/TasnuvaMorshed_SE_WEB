@@ -9,5 +9,6 @@ import com.cricket.model.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
 	List<User> findByCountry(String country);
+	public User findByUsernameAndPassword(String username,String password);
 
 }

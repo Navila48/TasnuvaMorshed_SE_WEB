@@ -23,7 +23,7 @@
 			<a href="/welcome" class="navbar-brand">ICC</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Login</a></li>
+					<li><a href="/login">Login</a></li>
 					<li><a href="/registerCountry">New Country</a></li>
 					<li><a href="/show-countries">All Countries</a></li>
 					<li><a href="/register-user">New Team Member</a></li>
@@ -268,6 +268,37 @@
 </c:when>
 
 
+
+<c:when test="${mode=='LOGIN_USER' }">
+			<div class="container text-center">
+				<h3>User Login</h3>
+				<hr>
+				<form class="form-horizontal" method="POST" action="login-user">
+				<c:if test="${not empty error }">
+				<div class="alert alert-danger">
+				<c:out value="${error }"></c:out>
+				</div>
+				</c:if>					
+					<div class="form-group">
+						<label class="control-label col-md-3">Username</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="username"
+								value="${user.username }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Password</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" name="password"
+								value="${user.password }" />
+						</div>
+					</div>
+					<div class="form-group ">
+						<input type="submit" class="btn btn-primary" value="Login" />
+					</div>
+					</form>
+					</div>
+					</c:when>
 	</c:choose>
 
 	<!-- Optional JavaScript -->
