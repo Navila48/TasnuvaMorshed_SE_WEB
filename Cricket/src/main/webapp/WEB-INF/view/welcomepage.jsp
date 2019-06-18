@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -48,6 +49,13 @@
 				<hr>
 				<form class="form-horizontal" method="POST" action="save-country">
 					<input type="hidden" name="id" value="${country.id }" />
+					
+					<c:if test="${not empty error }">
+				<div class="alert alert-danger">
+				<c:out value="${error }"></c:out>
+				</div>
+				</c:if>	
+					
 					<div class="form-group">
 						<label class="control-label col-md-3">Country</label>
 						<div class="col-md-7">
@@ -117,15 +125,25 @@
 			<div class="container text-center">
 				<h3>New Registration</h3>
 				<hr>
-				<form class="form-horizontal" method="POST" action="save-user">
+				<form class="form-horizontal" method="POST" action="save-user" >
 					<input type="hidden" name="id" value="${user.id }" />
+					
+					<c:if test="${not empty error }">
+				<div class="alert alert-danger">
+				<c:out value="${error }"></c:out>
+				</div>
+				</c:if>	
+					
 					<div class="form-group">
 						<label class="control-label col-md-3">Username</label>
 						<div class="col-md-7">
 							<input type="text" class="form-control" name="username"
 								value="${user.username }" />
+								
 						</div>
+						
 					</div>
+					
 					<div class="form-group">
 						<label class="control-label col-md-3">DOB</label>
 						<div class="col-md-7">
@@ -164,6 +182,9 @@
 					<div class="form-group ">
 						<input type="submit" class="btn btn-primary" value="Register" />
 					</div>
+					
+					
+					
 				</form>
 			</div>
 </c:when>
@@ -214,7 +235,7 @@
 
 <c:when test="${mode=='UPDATE_USER' }">
 			<div class="container text-center">
-				<h3>New Registration</h3>
+				<h3>Update User</h3>
 				<hr>
 				<form class="form-horizontal" method="POST" action="save-user">
 					<input type="hidden" name="id" value="${user.id }" />
@@ -285,6 +306,7 @@
 							<input type="text" class="form-control" name="username"
 								value="${user.username }" />
 						</div>
+						
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-3">Password</label>

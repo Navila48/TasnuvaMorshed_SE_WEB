@@ -1,16 +1,19 @@
 package com.cricket.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cricket.model.Country;
 import com.cricket.model.User;
@@ -40,9 +43,17 @@ public class ApplicationController {
 	@PostMapping("/save-country")
 	public String registerCountry(@ModelAttribute Country country,BindingResult bindingResult,HttpServletRequest request)
 	{
+		if(bindingResult.hasErrors())
+		{			
+			request.setAttribute("mode","REGISTER_COUNTRY");
+			request.setAttribute("error","Field Can't be emprty");
+			return "welcomepage";
+		}
+		else {
 		countryService.saveMyCountry(country);
 		request.setAttribute("mode","HOME");
 		return "welcomepage";
+		}
 	}
 	
 	@GetMapping("/show-countries")
@@ -78,11 +89,19 @@ public class ApplicationController {
 	}
 	
 	@PostMapping("/save-user")
-	public String registerUser(@ModelAttribute User user,BindingResult bindingResult,HttpServletRequest request)
+	public String registerUser(@Valid @ModelAttribute User user,BindingResult bindingResult,HttpServletRequest request)
 	{
+		if(bindingResult.hasErrors())
+		{
+			request.setAttribute("error","Field Can't be emprty");
+			request.setAttribute("mode","REGISTER_USER");
+			return "welcomepage";
+		}
+		else {
 		userService.saveMyUser(user);
 		request.setAttribute("mode","HOME");
 		return "welcomepage";
+		}
 	}
 	
 	@GetMapping("/show-users")

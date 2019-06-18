@@ -5,18 +5,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name="team")
 public class User {
 @Id
 private int id;
-@NotNull(message="provide name")
+@NotBlank()
 private String username;
+@NotNull()
 private String dob;
 private int age;
+@NotNull()
 private String role;
+@NotNull
 private String country;
+@NotNull
 private String password;
 public User()
 {
