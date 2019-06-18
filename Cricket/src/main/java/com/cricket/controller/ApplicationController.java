@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -81,6 +82,31 @@ public class ApplicationController {
 	{
 		userService.saveMyUser(user);
 		request.setAttribute("mode","HOME");
+		return "welcomepage";
+	}
+	
+	@GetMapping("/show-users")
+	public String showUser( @RequestParam(defaultValue="") String country,HttpServletRequest request)
+	{
+		request.setAttribute("users", userService.findByName(country));
+		request.setAttribute("mode", "ALL_TeamMembers");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/delete-user")
+	public String deleteUser(@RequestParam int id,@RequestParam(defaultValue="") String country,HttpServletRequest request)
+	{
+		userService.deleteMyUser(id);
+		request.setAttribute("users", userService.findByName(country));
+		request.setAttribute("mode", "ALL_TeamMembers");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/edit-user")
+	public String editUser(@RequestParam int id,HttpServletRequest request)
+	{
+		request.setAttribute("user",userService.editMyUser(id));
+		request.setAttribute("mode","UPDATE_USER");
 		return "welcomepage";
 	}
 }

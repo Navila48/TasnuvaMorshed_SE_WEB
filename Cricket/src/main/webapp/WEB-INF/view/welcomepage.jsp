@@ -27,7 +27,7 @@
 					<li><a href="/registerCountry">New Country</a></li>
 					<li><a href="/show-countries">All Countries</a></li>
 					<li><a href="/register-user">New Team Member</a></li>
-					<li><a href="#">All Team Members</a></li>
+					<li><a href="/show-users">All Team Members</a></li>
 				</ul>
 			</div>
 		</div>
@@ -174,6 +174,15 @@
 				<h3>All Team Members</h3>
 				<hr>
 				
+				<div class="container mySpace">
+	     <form method="GET" action="/show-users" class="form-inline">
+	        <div class="form-group mb-2">
+	         <input type="text" class="form-control" name="country"  placeholder="Search User" />
+	         <input type="submit" value="Search"  class="btn btn-primary"/>
+	        </div>
+</form>
+</div>
+				
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
 						<thead>
@@ -188,9 +197,10 @@
 						<tbody>
 							<c:forEach var="user" items="${users }">
 								<tr>
-									<td>${user.id}</td>
 									<td>${user.username}</td>
-									<td><a href="/delete-user?id=${user.id }"><span
+									<td>${user.age}</td>
+									<td>${user.role }</td>
+									<td><a href="/delete-user?id=${user.id }&country=${user.country}"><span
 											class="glyphicon glyphicon-trash"></span></a></td>
 									<td><a href="/edit-user?id=${user.id }"><span
 											class="glyphicon glyphicon-pencil"></span></a></td>
@@ -201,6 +211,63 @@
 				</div>
 			</div>
 </c:when>
+
+<c:when test="${mode=='UPDATE_USER' }">
+			<div class="container text-center">
+				<h3>New Registration</h3>
+				<hr>
+				<form class="form-horizontal" method="POST" action="save-user">
+					<input type="hidden" name="id" value="${user.id }" />
+					<div class="form-group">
+						<label class="control-label col-md-3">Username</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="username"
+								value="${user.username }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">DOB</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="dob"
+								value="${user.dob }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Age</label>
+						<div class="col-md-7">
+							<input type="text" class="form-control" name="age"
+								value="${user.age }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Role </label>
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="role"
+								value="${user.role }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Country </label>
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="country"
+								value="${user.country }" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-md-3">Password</label>
+						<div class="col-md-7">
+							<input type="password" class="form-control" name="password"
+								value="${user.password }" />
+						</div>
+					</div>
+					<div class="form-group ">
+						<input type="submit" class="btn btn-primary" value="Register" />
+					</div>
+				</form>
+			</div>
+</c:when>
+
+
 	</c:choose>
 
 	<!-- Optional JavaScript -->
